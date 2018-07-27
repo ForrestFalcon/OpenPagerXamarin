@@ -27,7 +27,7 @@ namespace OpenPager.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as Operation;
             if (item == null)
                 return;
 
@@ -37,10 +37,15 @@ namespace OpenPager.Views
             ItemsListView.SelectedItem = null;
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+	    async void AddItem_Clicked(object sender, EventArgs e)
+	    {
+	        await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
+
+	    async void Settings_Clicked(object sender, EventArgs e)
+	    {
+	        await Navigation.PushAsync(new NavigationPage(new SettingsPage()));
+	    }
 
         protected override void OnAppearing()
         {

@@ -8,21 +8,21 @@ using OpenPager.Models;
 [assembly: Xamarin.Forms.Dependency(typeof(OpenPager.Services.MockDataStore))]
 namespace OpenPager.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Operation>
     {
-        List<Item> items;
+        List<Operation> items;
 
         public MockDataStore()
         {
-            items = new List<Item>();
-            var mockItems = new List<Item>
+            items = new List<Operation>();
+            var mockItems = new List<Operation>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
             };
 
             foreach (var item in mockItems)
@@ -31,36 +31,36 @@ namespace OpenPager.Services
             }
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Operation operation)
         {
-            items.Add(item);
+            items.Add(operation);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Operation operation)
         {
-            var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
-            items.Add(item);
+            var item = items.FirstOrDefault(arg => arg.Id == operation.Id);
+            items.Remove(item);
+            items.Add(operation);
 
             return await Task.FromResult(true);
         }
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var _item = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(_item);
+            var item = items.FirstOrDefault(arg => arg.Id == id);
+            items.Remove(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Operation> GetItemAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Operation>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }

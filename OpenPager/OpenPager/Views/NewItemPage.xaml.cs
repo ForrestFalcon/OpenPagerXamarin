@@ -11,13 +11,13 @@ namespace OpenPager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Operation Operation { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Operation = new Operation
             {
                 Text = "Item name",
                 Description = "This is an item description."
@@ -28,7 +28,7 @@ namespace OpenPager.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddItem", Operation);
             await Navigation.PopModalAsync();
         }
     }

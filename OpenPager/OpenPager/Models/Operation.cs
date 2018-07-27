@@ -2,7 +2,7 @@
 
 namespace OpenPager.Models
 {
-    public class Item
+    public class Operation
     {
         public string Id { get; set; }
         public string Text { get; set; }

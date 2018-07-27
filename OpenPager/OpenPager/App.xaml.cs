@@ -11,7 +11,7 @@ namespace OpenPager
 		
 		public App ()
 		{
-			InitializeComponent();
+            InitializeComponent();
 
 
 			MainPage = new MainPage();

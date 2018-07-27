@@ -6,11 +6,11 @@ namespace OpenPager.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Operation Operation { get; set; }
+        public ItemDetailViewModel(Operation operation = null)
         {
-            Title = item?.Text;
-            Item = item;
+            Title = operation?.Text;
+            Operation = operation;
         }
     }
 }

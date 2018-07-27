@@ -12,6 +12,7 @@
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
+        <ToolbarItem Text="Settings" Clicked="Settings_Clicked" Icon="ic_settings_black_48dp.png" Order="Primary" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
