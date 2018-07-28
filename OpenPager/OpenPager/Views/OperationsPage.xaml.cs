@@ -14,15 +14,15 @@ using OpenPager.ViewModels;
 namespace OpenPager.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ItemsPage : ContentPage
+	public partial class OperationsPage : ContentPage
 	{
-        ItemsViewModel viewModel;
+        OperationsViewModel viewModel;
 
-        public ItemsPage()
+        public OperationsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new OperationsViewModel();
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -31,7 +31,7 @@ namespace OpenPager.Views
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new OperationDetailPage(new OperationDetailViewModel(item)));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
@@ -44,7 +44,7 @@ namespace OpenPager.Views
 
 	    async void Settings_Clicked(object sender, EventArgs e)
 	    {
-	        await Navigation.PushAsync(new NavigationPage(new SettingsPage()));
+	        await Navigation.PushAsync(new SettingsPage());
 	    }
 
         protected override void OnAppearing()
@@ -54,5 +54,10 @@ namespace OpenPager.Views
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }
-    }
+
+	    async Task AboutUs_Clicked(object sender, EventArgs e)
+	    {
+	        await Navigation.PushAsync(new AboutPage());
+        }
+	}
 }

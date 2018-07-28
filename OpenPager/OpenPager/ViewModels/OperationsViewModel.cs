@@ -10,14 +10,14 @@ using OpenPager.Views;
 
 namespace OpenPager.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class OperationsViewModel : BaseViewModel
     {
         public ObservableCollection<Operation> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        public OperationsViewModel()
         {
-            Title = "Browse";
+            Title = "Alarme";
             Items = new ObservableCollection<Operation>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

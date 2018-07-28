@@ -4,10 +4,10 @@ using OpenPager.Models;
 
 namespace OpenPager.ViewModels
 {
-    public class ItemDetailViewModel : BaseViewModel
+    public class OperationDetailViewModel : BaseViewModel
     {
         public Operation Operation { get; set; }
-        public ItemDetailViewModel(Operation operation = null)
+        public OperationDetailViewModel(Operation operation = null)
         {
             Title = operation?.Text;
             Operation = operation;

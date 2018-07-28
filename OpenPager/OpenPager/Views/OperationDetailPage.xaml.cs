@@ -9,18 +9,18 @@ using OpenPager.ViewModels;
 namespace OpenPager.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ItemDetailPage : ContentPage
+	public partial class OperationDetailPage : ContentPage
 	{
-        ItemDetailViewModel viewModel;
+        OperationDetailViewModel viewModel;
 
-        public ItemDetailPage(ItemDetailViewModel viewModel)
+        public OperationDetailPage(OperationDetailViewModel viewModel)
         {
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
         }
 
-        public ItemDetailPage()
+        public OperationDetailPage()
         {
             InitializeComponent();
 
@@ -30,7 +30,7 @@ namespace OpenPager.Views
                 Description = "This is an item description."
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new OperationDetailViewModel(item);
             BindingContext = viewModel;
         }
     }

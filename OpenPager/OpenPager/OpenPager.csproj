@@ -11,6 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\OperationDetailPage.xaml.cs">
+      <DependentUpon>OperationDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\OperationsPage.xaml.cs">
+      <DependentUpon>OperationsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

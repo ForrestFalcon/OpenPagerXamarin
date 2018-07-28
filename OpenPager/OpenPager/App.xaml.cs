@@ -14,7 +14,7 @@ namespace OpenPager
             InitializeComponent();
 
 
-			MainPage = new MainPage();
+			MainPage = new NavigationPage(new OperationsPage());
 		}
 
 		protected override void OnStart ()
