@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Xamarin.Forms;
-
 using OpenPager.Models;
 using OpenPager.Services;
 
@@ -12,24 +10,30 @@ namespace OpenPager.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Operation> DataStore => DependencyService.Get<IDataStore<Operation>>() ?? new MockDataStore();
+        public IDataStore<Operation> DataStore { get; }
 
-        bool isBusy = false;
+        public BaseViewModel()
+        {
+            DataStore = DependencyService.Get<IDataStore<Operation>>() ?? new MockDataStore();
+        }
+
+        bool _isBusy = false;
+
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
 
-        string title = string.Empty;
+        string _title = string.Empty;
+
         public string Title
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
+        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "",
             Action onChanged = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
@@ -42,7 +46,9 @@ namespace OpenPager.ViewModels
         }
 
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -51,6 +57,7 @@ namespace OpenPager.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }

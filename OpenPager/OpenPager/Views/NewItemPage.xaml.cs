@@ -19,8 +19,10 @@ namespace OpenPager.Views
 
             Operation = new Operation
             {
+                Id = Guid.NewGuid().ToString(),
                 Title = "Item name",
-                Message = "This is an item description."
+                Message = "This is an item description.",
+                Time = DateTime.Now
             };
 
             BindingContext = this;

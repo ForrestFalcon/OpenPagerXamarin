@@ -7,17 +7,19 @@
              x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Einstellungen" Clicked="Settings_Clicked" Icon="ic_settings_black_48dp.png" Order="Primary" />
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" Order="Secondary" />
         <ToolbarItem Text="About Us" Clicked="AboutUs_Clicked" Order="Secondary" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
+            <!--
+                IsPullToRefreshEnabled="False"
+                      RefreshCommand="{Binding LoadItemsCommand}"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"-->
             <ListView x:Name="ItemsListView"
                       ItemsSource="{Binding Items}"
                       VerticalOptions="FillAndExpand"
                       HasUnevenRows="true"
-                      RefreshCommand="{Binding LoadItemsCommand}"
-                      IsPullToRefreshEnabled="true"
-                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       CachingStrategy="RecycleElement"
                       ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>

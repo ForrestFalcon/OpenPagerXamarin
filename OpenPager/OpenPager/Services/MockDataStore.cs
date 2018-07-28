@@ -60,7 +60,7 @@ namespace OpenPager.Services
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Operation>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<List<Operation>> GetItemsAsync()
         {
             return await Task.FromResult(items);
         }
