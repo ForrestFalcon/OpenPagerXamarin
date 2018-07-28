@@ -14,12 +14,15 @@ namespace OpenPager.ViewModels
     {
         public ObservableCollection<Operation> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public Command<MenuItem> DeleteCommand { get; set; }
 
         public OperationsViewModel()
         {
             Title = "Alarme";
             Items = new ObservableCollection<Operation>();
+
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            DeleteCommand = new Command<MenuItem>(async (menuItem) => await DeleteOperation(menuItem.CommandParameter as Operation));
 
             MessagingCenter.Subscribe<NewItemPage, Operation>(this, "AddItem", async (obj, item) =>
             {
@@ -53,6 +56,12 @@ namespace OpenPager.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        public async Task DeleteOperation(Operation operation)
+        {
+            Items.Remove(operation);
+            await DataStore.DeleteItemAsync(operation.Id);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace OpenPager.ViewModels
         public Operation Operation { get; set; }
         public OperationDetailViewModel(Operation operation = null)
         {
-            Title = operation?.Text;
+            Title = operation?.Title;
             Operation = operation;
         }
     }

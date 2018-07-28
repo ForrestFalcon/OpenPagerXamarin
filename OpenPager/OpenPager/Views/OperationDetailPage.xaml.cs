@@ -26,8 +26,8 @@ namespace OpenPager.Views
 
             var item = new Operation
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Title = "Item 1",
+                Message = "This is an item description."
             };
 
             viewModel = new OperationDetailViewModel(item);

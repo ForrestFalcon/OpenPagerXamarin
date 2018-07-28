@@ -5,8 +5,8 @@
              Title="{Binding Title}">
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Operation.Text}" FontSize="Small"/>
+        <Label Text="{Binding Operation.Title}" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Operation.Description}" FontSize="Small"/>
+        <Label Text="{Binding Operation.Message}" FontSize="Small"/>
     </StackLayout>
 </ContentPage>

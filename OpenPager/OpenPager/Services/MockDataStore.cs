@@ -17,12 +17,12 @@ namespace OpenPager.Services
             items = new List<Operation>();
             var mockItems = new List<Operation>
             {
-                new Operation { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Operation { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Operation { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Operation { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Operation { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Operation { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Title = "First item", Message="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Title = "Second item", Message="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Title = "Third item", Message="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Title = "Fourth item", Message="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Title = "Fifth item", Message="This is an item description." },
+                new Operation { Id = Guid.NewGuid().ToString(), Title = "Sixth item", Message="This is an item description." },
             };
 
             foreach (var item in mockItems)

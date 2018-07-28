@@ -23,12 +23,15 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete" Clicked="Delete_Clicked" CommandParameter="{Binding .}" IsDestructive="True"/>
+                            </ViewCell.ContextActions>
                             <StackLayout Padding="10">
-                                <Label Text="{Binding Text}"
+                                <Label Text="{Binding Title}"
                                        LineBreakMode="NoWrap"
                                        Style="{DynamicResource ListItemTextStyle}"
                                        FontSize="16" />
-                                <Label Text="{Binding Description}"
+                                <Label Text="{Binding Message}"
                                        LineBreakMode="NoWrap"
                                        Style="{DynamicResource ListItemDetailTextStyle}"
                                        FontSize="13" />

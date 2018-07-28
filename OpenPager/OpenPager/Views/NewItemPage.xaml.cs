@@ -19,8 +19,8 @@ namespace OpenPager.Views
 
             Operation = new Operation
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Title = "Item name",
+                Message = "This is an item description."
             };
 
             BindingContext = this;

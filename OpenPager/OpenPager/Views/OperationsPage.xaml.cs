@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using OpenPager.Models;
 using OpenPager.Views;
 using OpenPager.ViewModels;
 
 namespace OpenPager.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class OperationsPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class OperationsPage : ContentPage
+    {
         OperationsViewModel viewModel;
 
         public OperationsPage()
@@ -37,15 +35,15 @@ namespace OpenPager.Views
             ItemsListView.SelectedItem = null;
         }
 
-	    async void AddItem_Clicked(object sender, EventArgs e)
-	    {
-	        await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+        async void AddItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
 
-	    async void Settings_Clicked(object sender, EventArgs e)
-	    {
-	        await Navigation.PushAsync(new SettingsPage());
-	    }
+        async void Settings_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
+        }
 
         protected override void OnAppearing()
         {
@@ -55,9 +53,15 @@ namespace OpenPager.Views
                 viewModel.LoadItemsCommand.Execute(null);
         }
 
-	    async Task AboutUs_Clicked(object sender, EventArgs e)
-	    {
-	        await Navigation.PushAsync(new AboutPage());
+        async Task AboutUs_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AboutPage());
         }
-	}
+
+        async Task Delete_Clicked(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem) sender);
+            await viewModel.DeleteOperation(mi.CommandParameter as Operation);
+        }
+    }
 }
