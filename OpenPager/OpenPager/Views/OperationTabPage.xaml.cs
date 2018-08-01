@@ -7,21 +7,27 @@ using OpenPager.Models;
 using OpenPager.ViewModels;
 using Plugin.ExternalMaps;
 using Plugin.ExternalMaps.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace OpenPager.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OperationTabPage : TabbedPage
+    public partial class OperationTabPage
     {
+        private readonly Operation _operation;
+
         public OperationTabPage(Operation operation)
         {
-            InitializeComponent();
+            _operation = operation;
             Title = operation?.Title;
 
+            InitializeComponent();
+
             Children.Add(new OperationDetailPage(new OperationDetailViewModel(operation)));
-            Children.Add(new OperationMapPage(operation));
+            CheckLocation();
 
             if (operation != null && operation.DestinationLat.HasValue && operation.DestinationLng.HasValue)
             {
@@ -30,6 +36,16 @@ namespace OpenPager.Views
                     await CrossExternalMaps.Current.NavigateTo(operation.Destination, operation.DestinationLat.Value,
                         operation.DestinationLng.Value, NavigationType.Driving);
                 }));
+            }
+        }
+
+        private async void CheckLocation()
+        {
+            var locationStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+
+            if (locationStatus == PermissionStatus.Granted)
+            {
+                Children.Add(new OperationMapPage(_operation));
             }
         }
     }

@@ -12,16 +12,39 @@ namespace OpenPager.Views
     {
         public OperationMapPage(Operation operation)
         {
+            Title = "Karte";
+
+            if (!operation.DestinationLat.HasValue || !operation.DestinationLng.HasValue)
+            {
+                return;
+            }
+
+
+            var position =
+                new Position(operation.DestinationLat.Value, operation.DestinationLng.Value); // Latitude, Longitude
+
             var map = new Map(
                 MapSpan.FromCenterAndRadius(
-                    new Position(37, -122), Distance.FromMiles(0.3)))
+                    position, Distance.FromKilometers(0.3)))
             {
                 IsShowingUser = true,
+                HasZoomEnabled = true,
                 HeightRequest = 100,
                 WidthRequest = 960,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            var stack = new StackLayout { Spacing = 0 };
+
+                var pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = position,
+                    Label = "Einsatzort",
+                    Address = operation.Destination
+                };
+                map.Pins.Add(pin);
+            
+
+            var stack = new StackLayout {Spacing = 0};
             stack.Children.Add(map);
             Content = stack;
         }

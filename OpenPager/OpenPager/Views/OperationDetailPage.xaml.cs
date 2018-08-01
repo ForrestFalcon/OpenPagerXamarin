@@ -17,6 +17,8 @@ namespace OpenPager.Views
         {
             InitializeComponent();
 
+            Title = "Info";
+
             BindingContext = this.viewModel = viewModel;
         }
 

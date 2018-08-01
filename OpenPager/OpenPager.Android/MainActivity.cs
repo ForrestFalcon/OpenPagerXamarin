@@ -3,11 +3,15 @@
 using Android.App;
 using Android.Content.PM;
 using Android.Gms.Common;
+using Android.Media;
 using Android.Widget;
 using Android.OS;
+using Android.Runtime;
 using Android.Util;
 using Newtonsoft.Json;
 using OpenPager.Models;
+using Plugin.CurrentActivity;
+using Plugin.Permissions;
 
 namespace OpenPager.Droid
 {
@@ -22,7 +26,7 @@ namespace OpenPager.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            
             CheckPlayService();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
@@ -31,6 +35,10 @@ namespace OpenPager.Droid
             LoadApplication(_app.Value);
             
             CheckOperationJson(Intent);
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         protected override void OnNewIntent(Android.Content.Intent intent)
