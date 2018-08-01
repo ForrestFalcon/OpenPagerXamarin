@@ -30,7 +30,7 @@ namespace OpenPager.Views
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new OperationDetailPage(new OperationDetailViewModel(item)));
+            await Navigation.PushAsync(new OperationTabPage(item));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

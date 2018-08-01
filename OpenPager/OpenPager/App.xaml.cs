@@ -35,7 +35,7 @@ namespace OpenPager
             await DependencyService.Get<IDataStore<Operation>>().AddItemAsync(operation);
 
             await MainPage.Navigation.PushModalAsync(
-                new NavigationPage(new OperationDetailPage(new OperationDetailViewModel(operation))));
+                new NavigationPage(new OperationTabPage(operation)));
 
             MessagingCenter.Send(this, Constants.MessageNewOperation);
         }
