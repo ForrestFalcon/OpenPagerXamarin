@@ -12,21 +12,11 @@ namespace OpenPager
 {
 	public partial class App : Application
 	{
-	    private static SQLiteAsyncConnection database;
+	    private static readonly Lazy<SQLiteAsyncConnection> DatabaseLazy = new Lazy<SQLiteAsyncConnection>(() => new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db3")));
 
-        public static SQLiteAsyncConnection Database
-	    {
-	        get
-	        {
-	            if (database == null)
-	            {
-	                database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db3"));
-	            }
-	            return database;
-	        }
-	    }
+	    public static SQLiteAsyncConnection Database => DatabaseLazy.Value;
 
-        public App ()
+	    public App ()
 		{
             DependencyService.Register<IDataStore<Operation>, OperationDataStore>();
 

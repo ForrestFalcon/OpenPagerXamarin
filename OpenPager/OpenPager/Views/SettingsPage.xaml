@@ -10,11 +10,15 @@
     </ContentPage.BindingContext>
     <sv:SettingsView HasUnevenRows="true">
 
-        <sv:Section Title="Header1" FooterText="Footer1">
+        <sv:Section Title="Header1">
             <sv:LabelCell Title="Label" ValueText="value" />
             <sv:SwitchCell Title="Switch" On="true" 
                            Description="This is description." />
             <sv:CheckboxCell Title="Checkbox" Checked="true" />
+        </sv:Section>
+
+        <sv:Section Title="Push-Benachrichtigungen">
+            <sv:CommandCell Title="FCM-Key" Description="{Binding FcmKey}" Command="{Binding ShareKeCommand}" />
         </sv:Section>
 
     </sv:SettingsView>

@@ -11,7 +11,7 @@ namespace OpenPager.Models
         public string Message { get; set; }
         public DateTime Time { get; set; }
         public string Destination { get; set; }
-        public float DestinationLat { get; set; }
-        public float DestinationLng { get; set; }
+        public float? DestinationLat { get; set; }
+        public float? DestinationLng { get; set; }
     }
 }

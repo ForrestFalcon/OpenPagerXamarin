@@ -2,10 +2,13 @@
 
 using Android.App;
 using Android.Content.PM;
+using Android.Gms.Common;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Util;
+using Firebase.Iid;
 
 namespace OpenPager.Droid
 {
@@ -19,8 +22,26 @@ namespace OpenPager.Droid
 
             base.OnCreate(bundle);
 
+            CheckPlayService();
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+        }
+
+        private void CheckPlayService()
+        {
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            if (resultCode != ConnectionResult.Success)
+            {
+                if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                {
+                    Toast.MakeText(this, GoogleApiAvailability.Instance.GetErrorString(resultCode), ToastLength.Long);
+                }
+                else
+                {
+                    Toast.MakeText(this, "This device is not supported", ToastLength.Long);
+                }
+            }
         }
     }
 }
