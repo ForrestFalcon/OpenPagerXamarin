@@ -158,7 +158,13 @@
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.166-beta</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.ExternalMaps">
+      <Version>4.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.637273" />
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>3.1.0.637273</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -175,5 +181,14 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_settings_black_48pt%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_directions_car_white_24pt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_directions_car_white_24pt%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_directions_car_white_24pt%403x.png" />
   </ItemGroup>
 </Project>

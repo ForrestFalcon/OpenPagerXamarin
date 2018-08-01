@@ -26,6 +26,8 @@ namespace OpenPager.Droid
             CheckPlayService();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            global::Xamarin.FormsMaps.Init(this, bundle);
+
             LoadApplication(_app.Value);
             
             CheckOperationJson(Intent);
