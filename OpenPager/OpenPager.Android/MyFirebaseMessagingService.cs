@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Firebase.Messaging;
 using Java.Lang;
+using Microsoft.AppCenter.Crashes;
 using OpenPager.Models;
 using Double = System.Double;
 using Exception = System.Exception;
@@ -66,7 +67,7 @@ namespace OpenPager.Droid
                         catch (Exception e)
                         {
                             Log.Error(TAG, e.ToString());
-                            // Crashes.TrackError(e);
+                            Crashes.TrackError(e);
                         }
                         break;
                     case "timestamp":
@@ -77,7 +78,7 @@ namespace OpenPager.Droid
                         catch (Exception e)
                         {
                             Log.Error(TAG, e.ToString());
-                            // Crashes.TrackError(e);
+                            Crashes.TrackError(e);
                         }
                         break;
                 }
