@@ -45,7 +45,6 @@ namespace OpenPager.Droid
             }
 
             var operationJson = intent.GetStringExtra(MyFirebaseMessagingService.INTENT_EXTRA_OPERATION);
-            Log.Debug("ZEFIX", operationJson);
             if (String.IsNullOrEmpty(operationJson))
             {
                 return;

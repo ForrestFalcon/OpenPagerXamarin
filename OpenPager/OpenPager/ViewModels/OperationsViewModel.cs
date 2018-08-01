@@ -26,10 +26,11 @@ namespace OpenPager.ViewModels
 
             MessagingCenter.Subscribe<NewItemPage, Operation>(this, "AddItem", async (obj, item) =>
             {
-                var _item = item as Operation;
-                Items.Add(_item);
-                await DataStore.AddItemAsync(_item);
+                Items.Add(item);
+                await DataStore.AddItemAsync(item);
             });
+
+            MessagingCenter.Subscribe<App>(this, Constants.MessageNewOperation, sender => LoadItemsCommand.Execute(null));
         }
 
         async Task ExecuteLoadItemsCommand()

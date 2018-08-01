@@ -36,7 +36,7 @@ namespace OpenPager.Services
 
         public Task<List<Operation>> GetItemsAsync()
         {
-            return App.Database.Table<Operation>().ToListAsync();
+            return App.Database.Table<Operation>().OrderByDescending(o => o.Time).ToListAsync();
         }
     }
 }

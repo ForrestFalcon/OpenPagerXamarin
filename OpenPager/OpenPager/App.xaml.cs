@@ -36,6 +36,8 @@ namespace OpenPager
 
             await MainPage.Navigation.PushModalAsync(
                 new NavigationPage(new OperationDetailPage(new OperationDetailViewModel(operation))));
+
+            MessagingCenter.Send(this, Constants.MessageNewOperation);
         }
 
         protected override void OnStart()

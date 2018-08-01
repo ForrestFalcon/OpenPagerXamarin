@@ -21,6 +21,7 @@ namespace OpenPager.Views
             InitializeComponent();
 
             BindingContext = viewModel = new OperationsViewModel();
+
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
