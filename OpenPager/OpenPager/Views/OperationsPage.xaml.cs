@@ -42,7 +42,7 @@ namespace OpenPager.Views
 
         async void Settings_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SettingsPage());
+            await Navigation.PushAsync(new SettingsPage(), true);
         }
 
         protected override void OnAppearing()

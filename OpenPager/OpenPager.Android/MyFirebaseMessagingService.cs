@@ -14,17 +14,22 @@ using Android.Widget;
 using Firebase.Messaging;
 using Java.Lang;
 using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
 using OpenPager.Models;
 using Double = System.Double;
 using Exception = System.Exception;
 
 namespace OpenPager.Droid
 {
+
     [Service]
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService
     {
+        public const string INTENT_EXTRA_OPERATION = "operation";
+
         const string TAG = "MyFirebaseMsgService";
+        
         public override void OnMessageReceived(RemoteMessage message)
         {
             Log.Debug(TAG, "From: " + message.From);
@@ -34,6 +39,9 @@ namespace OpenPager.Droid
             {
                 Operation operation = mapDataToOperation(message.Data);
 
+                Intent intent = new Intent(this, typeof(MainActivity));
+                intent.PutExtra(INTENT_EXTRA_OPERATION, JsonConvert.SerializeObject(operation));
+                StartActivity(intent);
             }
         }
 
