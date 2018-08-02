@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using OpenPager.Services;
-using Plugin.Share;
-using Plugin.Share.Abstractions;
+﻿using OpenPager.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace OpenPager.ViewModels
@@ -25,16 +20,16 @@ namespace OpenPager.ViewModels
         {
             Title = "Einstellungen";
             FcmKey = DependencyService.Get<IPushHandler>().GetKey();
-            ShareKeCommand = new Command(() =>
-            {
-                if (!CrossShare.IsSupported)
-                    return;
+            ShareKeCommand = new Command(ShareKey);
+        }
 
-                CrossShare.Current.Share(new ShareMessage
-                {
-                    Title = "OpenPager FCM-Key",
-                    Text = FcmKey
-                });
+        private async void ShareKey()
+        {
+            await DataTransfer.RequestAsync(new ShareTextRequest
+            {
+                Title = "Teile FCM-Key",
+                Subject = "OpenPager FCM-Key",
+                Text = FcmKey
             });
         }
     }

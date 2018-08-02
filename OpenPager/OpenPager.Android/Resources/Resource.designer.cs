@@ -5191,7 +5191,7 @@ namespace OpenPager.Droid
 			public const int ic_mr_button_grey = 2130837787;
 			
 			// aapt resource value: 0x7f02011c
-			public const int ic_settings_black_48dp = 2130837788;
+			public const int ic_settings_white_24 = 2130837788;
 			
 			// aapt resource value: 0x7f02011d
 			public const int ic_vol_type_speaker_dark = 2130837789;

@@ -7,6 +7,7 @@ using OpenPager.ViewModels;
 using Xamarin.Forms;
 using OpenPager.Views;
 using SQLite;
+using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -26,7 +27,10 @@ namespace OpenPager
         {
             DependencyService.Register<IDataStore<Operation>, OperationDataStore>();
 
+            VersionTracking.Track();
+            
             InitializeComponent();
+
             MainPage = new NavigationPage(new OperationsPage());
         }
 

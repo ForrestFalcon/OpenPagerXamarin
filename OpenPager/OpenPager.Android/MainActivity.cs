@@ -29,8 +29,9 @@ namespace OpenPager.Droid
             
             CheckPlayService();
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
-            global::Xamarin.FormsMaps.Init(this, bundle);
+            Xamarin.Forms.Forms.Init(this, bundle);
+            Xamarin.FormsMaps.Init(this, bundle);
+            Xamarin.Essentials.Platform.Init(this, bundle);
 
             LoadApplication(_app.Value);
             
@@ -39,6 +40,7 @@ namespace OpenPager.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         protected override void OnNewIntent(Android.Content.Intent intent)

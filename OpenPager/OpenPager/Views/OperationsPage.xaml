@@ -6,7 +6,7 @@
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Einstellungen" Clicked="Settings_Clicked" Icon="ic_settings_black_48dp.png" Order="Primary" />
+        <ToolbarItem Text="Einstellungen" Clicked="Settings_Clicked" Icon="ic_settings_white_24.png" Order="Primary" />
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" Order="Secondary" />
         <ToolbarItem Text="About Us" Clicked="AboutUs_Clicked" Order="Secondary" />
     </ContentPage.ToolbarItems>
