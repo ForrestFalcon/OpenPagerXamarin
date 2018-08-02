@@ -14,6 +14,12 @@ namespace OpenPager.ViewModels
             set => SetProperty(ref _fcmKey, value);
         }
 
+        public bool PreferenceVibrate
+        {
+            get => Preferences.Get(Constants.PreferenceVibrate, Constants.PreferenceVibrateDefault);
+            set => Preferences.Set(Constants.PreferenceVibrate, value);
+        }
+
         public Command ShareKeCommand { get; set; }
 
         public SettingsViewModell()

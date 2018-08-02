@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:OpenPager.ViewModels"
@@ -10,11 +11,10 @@
     </ContentPage.BindingContext>
     <sv:SettingsView HasUnevenRows="true">
 
-        <sv:Section Title="Header1">
+        <sv:Section Title="Benachrichtigung">
             <sv:LabelCell Title="Label" ValueText="value" />
-            <sv:SwitchCell Title="Switch" On="true" 
-                           Description="This is description." />
-            <sv:CheckboxCell Title="Checkbox" Checked="true" />
+            <sv:SwitchCell Title="Vibration" On="{Binding PreferenceVibrate}"
+                           Description="Vibrieren bei Alarmempfang." />
         </sv:Section>
 
         <sv:Section Title="Push-Benachrichtigungen">

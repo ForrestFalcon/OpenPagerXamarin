@@ -27,7 +27,11 @@ namespace OpenPager
         {
             DependencyService.Register<IDataStore<Operation>, OperationDataStore>();
 
-            VersionTracking.Track();
+            if (!DesignMode.IsDesignModeEnabled)
+            {
+                VersionTracking.Track();
+            }
+
             
             InitializeComponent();
 
@@ -39,7 +43,7 @@ namespace OpenPager
             await DependencyService.Get<IDataStore<Operation>>().AddItemAsync(operation);
 
             await MainPage.Navigation.PushModalAsync(
-                new NavigationPage(new OperationTabPage(operation)));
+                new NavigationPage(new OperationTabPage(operation, true)));
 
             MessagingCenter.Send(this, Constants.MessageNewOperation);
         }

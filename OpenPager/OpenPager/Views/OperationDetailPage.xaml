@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenPager.Views.OperationDetailPage"
              Title="{Binding Title}">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Operation.Title}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Operation.Message}" FontSize="Small"/>
-    </StackLayout>
+    <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="SpaceEvenly">
+        <Label Text="{Binding Operation.Title}" FontSize="Large" FontAttributes="Bold" Margin="20" />
+
+        <Label Text="{Binding Timer}" TextColor="{Binding TimerColor}" FontSize="Medium" Margin="20"  />
+
+        <Label Text="{Binding Operation.Message}" FontSize="Medium" FlexLayout.Grow="1" Margin="20" HorizontalTextAlignment="Center" />
+
+        <Button Text="Alarm bestätigen" Command="{Binding AcceptCommand}" IsVisible="{Binding IsButtonVisible}" Margin="20" />
+    </FlexLayout>
 </ContentPage>

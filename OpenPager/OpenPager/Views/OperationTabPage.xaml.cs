@@ -19,14 +19,14 @@ namespace OpenPager.Views
     {
         private readonly Operation _operation;
 
-        public OperationTabPage(Operation operation)
+        public OperationTabPage(Operation operation, bool isAlarm = false)
         {
             _operation = operation;
             Title = operation?.Title;
 
             InitializeComponent();
 
-            Children.Add(new OperationDetailPage(new OperationDetailViewModel(operation)));
+            Children.Add(new OperationDetailPage(new OperationDetailViewModel(operation, isAlarm)));
             CheckLocation();
 
             if (operation != null && operation.DestinationLat.HasValue && operation.DestinationLng.HasValue)
