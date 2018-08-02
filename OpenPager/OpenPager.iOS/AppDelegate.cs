@@ -25,6 +25,8 @@ namespace OpenPager.iOS
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.FormsMaps.Init();
 
+            AiForms.Renderers.iOS.SettingsViewInit.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
