@@ -8,6 +8,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using OpenPager.Models;
 using Plugin.CurrentActivity;
@@ -26,8 +29,14 @@ namespace OpenPager.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            
             base.OnCreate(bundle);
+            
+            var appcenterKey = System.Environment.GetEnvironmentVariable("APPCENTER_KEY");
+            if (!String.IsNullOrEmpty(appcenterKey))
+            {
+                AppCenter.Start(appcenterKey, typeof(Analytics), typeof(Crashes));
+            }
 
             CheckPlayService();
 

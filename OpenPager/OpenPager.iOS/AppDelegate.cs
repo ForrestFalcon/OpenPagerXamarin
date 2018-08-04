@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using UIKit;
 
 namespace OpenPager.iOS
@@ -22,6 +25,12 @@ namespace OpenPager.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            var appcenterKey = System.Environment.GetEnvironmentVariable("APPCENTER_KEY");
+            if (!String.IsNullOrEmpty(appcenterKey))
+            {
+                AppCenter.Start(appcenterKey, typeof(Analytics), typeof(Crashes));
+            }
+
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.FormsMaps.Init();
 
