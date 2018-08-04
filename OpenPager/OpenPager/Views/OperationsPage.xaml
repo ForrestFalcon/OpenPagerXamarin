@@ -26,17 +26,27 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Delete" Clicked="Delete_Clicked" CommandParameter="{Binding .}" IsDestructive="True"/>
+                                <MenuItem Text="Delete" Clicked="Delete_Clicked" CommandParameter="{Binding .}"
+                                          IsDestructive="True" />
                             </ViewCell.ContextActions>
                             <StackLayout Padding="10">
                                 <Label Text="{Binding Title}"
-                                       LineBreakMode="NoWrap"
+                                       LineBreakMode="TailTruncation"
                                        Style="{DynamicResource ListItemTextStyle}"
-                                       FontSize="16" />
+                                       FontSize="14"
+                                       HorizontalOptions="StartAndExpand" />
                                 <Label Text="{Binding Message}"
                                        LineBreakMode="NoWrap"
                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                       HorizontalOptions="FillAndExpand"
                                        FontSize="13" />
+                                <Label Text="{Binding Time, StringFormat='{0:G}'}"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="12"
+                                       HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="NoWrap"
+                                       HorizontalTextAlignment="End" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
