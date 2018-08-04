@@ -16,6 +16,7 @@ using Java.Lang;
 using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using OpenPager.Models;
+using Xamarin.Essentials;
 using Double = System.Double;
 using Exception = System.Exception;
 
@@ -35,7 +36,8 @@ namespace OpenPager.Droid
             Log.Debug(TAG, "From: " + message.From);
             Log.Debug(TAG, "Notification Data: " + message.Data);
 
-            if (message.Data["type"].Equals("operation"))
+            bool isAlarmActive = Preferences.Get(Constants.PreferenceAlarmActivate, Constants.PreferenceAlarmActivateDefault);
+            if (message.Data["type"].Equals("operation") && isAlarmActive)
             {
                 Operation operation = mapDataToOperation(message.Data);
 

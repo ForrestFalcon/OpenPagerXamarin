@@ -12,13 +12,18 @@
     <sv:SettingsView HasUnevenRows="true">
 
         <sv:Section Title="Benachrichtigung">
-            <sv:LabelCell Title="Label" ValueText="value" />
+            <sv:SwitchCell Title="Alarm empfangen" On="{Binding PreferenceIsActive}"
+                           Description="Achtung: Wenn deaktiviert werden keine Alarme mehr empfangen." />
             <sv:SwitchCell Title="Vibration" On="{Binding PreferenceVibrate}"
                            Description="Vibrieren bei Alarmempfang." />
+            <sv:SwitchCell Title="Alarmtitel vorlesen" On="{Binding PreferenceTts}"
+                           Description="Alarmtitel bei Alarmempfang vorlesen." />
+            <sv:TextPickerCell Title="Vorlesen Lautstärke" Items="{Binding PreferenceTtsVolumeList}" SelectedItem="{Binding PreferenceTtsVolume}"
+                               Description="Lautstärke in Prozent welche beim Vorlesen gesetzt werden soll." />
         </sv:Section>
 
         <sv:Section Title="Push-Benachrichtigungen">
-            <sv:CommandCell Title="FCM-Key" Description="{Binding FcmKey}" Command="{Binding ShareKeCommand}" />
+            <sv:CommandCell Title="FCM-Key" Description="{Binding FcmKey}" Command="{Binding ShareKeyCommand}" />
         </sv:Section>
 
     </sv:SettingsView>

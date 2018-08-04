@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Gms.Common;
@@ -8,6 +7,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using Newtonsoft.Json;
 using OpenPager.Models;
 using Plugin.CurrentActivity;
@@ -15,7 +15,9 @@ using Plugin.Permissions;
 
 namespace OpenPager.Droid
 {
-    [Activity(Label = "OpenPager", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, LaunchMode = LaunchMode.SingleTask)]
+    [Activity(Label = "OpenPager", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+        LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         private readonly Lazy<App> _app = new Lazy<App>();
@@ -26,7 +28,7 @@ namespace OpenPager.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            
+
             CheckPlayService();
 
             Xamarin.Forms.Forms.Init(this, bundle);
@@ -34,10 +36,12 @@ namespace OpenPager.Droid
             Xamarin.Essentials.Platform.Init(this, bundle);
 
             LoadApplication(_app.Value);
-            
+
             CheckOperationJson(Intent);
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+            Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -62,8 +66,18 @@ namespace OpenPager.Droid
                 return;
             }
 
+            AddAlarmFlags();
+
             var operation = JsonConvert.DeserializeObject<Operation>(operationJson);
             _app.Value.PushOperationAsync(operation);
+        }
+
+        private void AddAlarmFlags()
+        {
+            Window.AddFlags(WindowManagerFlags.DismissKeyguard |
+                            WindowManagerFlags.ShowWhenLocked |
+                            WindowManagerFlags.TurnScreenOn |
+                            WindowManagerFlags.AllowLockWhileScreenOn);
         }
 
         private void CheckPlayService()
@@ -83,4 +97,3 @@ namespace OpenPager.Droid
         }
     }
 }
-

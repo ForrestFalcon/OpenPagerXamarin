@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenPager.Views.OperationDetailPage"
              Title="{Binding Title}">
-    <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="SpaceEvenly">
-        <Label Text="{Binding Operation.Title}" FontSize="Large" FontAttributes="Bold" Margin="20" />
+    <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="SpaceEvenly" Margin="20">
+        <Label Text="{Binding Operation.Title}" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" Margin="20" />
 
         <Label Text="{Binding Timer}" TextColor="{Binding TimerColor}" FontSize="Medium" Margin="20"  />
 
