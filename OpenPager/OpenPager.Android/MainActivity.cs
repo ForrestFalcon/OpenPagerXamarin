@@ -88,13 +88,6 @@ namespace OpenPager.Droid
             _app.Value.PushOperationAsync(operation);
         }
 
-        protected override void OnResume()
-        {
-            base.OnResume();
-
-            Profiler.Stop("OnResume");
-        }
-
         private void AddAlarmFlags()
         {
             Window.AddFlags(WindowManagerFlags.DismissKeyguard |
