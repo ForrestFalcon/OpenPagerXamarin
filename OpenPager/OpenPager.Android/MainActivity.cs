@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using OpenPager.Models;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
+using Xamarin.Forms;
 
 namespace OpenPager.Droid
 {
@@ -40,11 +41,17 @@ namespace OpenPager.Droid
 
             CheckPlayService();
 
-            Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.SetFlags("FastRenderers_Experimental");
+
+            Profiler.Start("Forms.Init");
+            Forms.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
-
+            Profiler.Stop("Forms.Init");
+            
+            Profiler.Start("LoadApplication");
             LoadApplication(_app.Value);
+            Profiler.Stop("LoadApplication");
 
             CheckOperationJson(Intent);
         }
@@ -79,6 +86,13 @@ namespace OpenPager.Droid
 
             var operation = JsonConvert.DeserializeObject<Operation>(operationJson);
             _app.Value.PushOperationAsync(operation);
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            Profiler.Stop("OnResume");
         }
 
         private void AddAlarmFlags()

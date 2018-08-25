@@ -21,6 +21,8 @@ namespace OpenPager.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+
+            Profiler.Start("OnResume");
             CrossCurrentActivity.Current.Init(this);
         }
     }
