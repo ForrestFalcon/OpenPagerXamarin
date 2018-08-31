@@ -7,7 +7,7 @@
              x:Class="OpenPager.Views.SettingsPage"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
-        <vm:SettingsViewModell />
+        <vm:SettingsViewModel />
     </ContentPage.BindingContext>
     <sv:SettingsView HasUnevenRows="true">
 
@@ -26,5 +26,8 @@
             <sv:CommandCell Title="FCM-Key" Description="{Binding FcmKey}" Command="{Binding ShareKeyCommand}" />
         </sv:Section>
 
+        <sv:Section Title="Debug">
+            <sv:CommandCell Title="Profiler Ergebnis" Description="Zeigt das Ergebnis des internen Profiler an." Command="{Binding ProfilerCommand}" />
+        </sv:Section>
     </sv:SettingsView>
 </ContentPage>

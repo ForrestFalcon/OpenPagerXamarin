@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using OpenPager.Models;
 using OpenPager.Services;
-using OpenPager.ViewModels;
 using Xamarin.Forms;
 using OpenPager.Views;
 using SQLite;

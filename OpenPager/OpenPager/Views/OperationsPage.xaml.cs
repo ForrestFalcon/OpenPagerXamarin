@@ -24,7 +24,7 @@ namespace OpenPager.Views
 
             BindingContext = viewModel = new OperationsViewModel();
         }
-
+        
         private async void CheckPermissions()
         {
             var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);

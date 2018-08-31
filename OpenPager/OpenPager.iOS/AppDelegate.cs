@@ -30,14 +30,18 @@ namespace OpenPager.iOS
             {
                 AppCenter.Start(appcenterKey, typeof(Analytics), typeof(Crashes));
             }
-
+            
+            Profiler.Start("Forms.Init");
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.FormsMaps.Init();
 
             AiForms.Renderers.iOS.SettingsViewInit.Init();
+            Profiler.Stop("Forms.Init");
 
+            Profiler.Start("LoadApplication");
             LoadApplication(new App());
-
+            Profiler.Stop("LoadApplication");
+            
             return base.FinishedLaunching(app, options);
         }
     }

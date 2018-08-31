@@ -56,6 +56,12 @@ namespace OpenPager.Droid
             CheckOperationJson(Intent);
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+            Profiler.Stop("OnResume");
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
             Permission[] grantResults)
         {

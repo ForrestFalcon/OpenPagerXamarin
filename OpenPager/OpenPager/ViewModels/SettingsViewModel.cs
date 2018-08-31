@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace OpenPager.ViewModels
 {
-    public class SettingsViewModell : BaseViewModel
+    public class SettingsViewModel : BaseViewModel
     {
         #region Properties
 
@@ -50,14 +50,20 @@ namespace OpenPager.ViewModels
         };
 
         public Command ShareKeyCommand { get; set; }
+        public Command ProfilerCommand { get; set; }
 
         #endregion
 
-        public SettingsViewModell()
+        public SettingsViewModel()
         {
             Title = "Einstellungen";
             FcmKey = DependencyService.Get<IPushHandler>().GetKey();
+
             ShareKeyCommand = new Command(ShareKey);
+            ProfilerCommand = new Command(async () =>
+                {
+                    await Application.Current.MainPage.DisplayAlert("Profiler result", Profiler.Result(), "OK");
+                });
         }
 
         private async void ShareKey()

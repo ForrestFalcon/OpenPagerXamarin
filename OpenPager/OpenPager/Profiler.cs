@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
@@ -8,28 +7,38 @@ namespace OpenPager
 {
     public static class Profiler
     {
-        static readonly ConcurrentDictionary<string, Stopwatch> watches = new ConcurrentDictionary<string, Stopwatch>();
+        private static readonly ConcurrentDictionary<string, Stopwatch> Watches = new ConcurrentDictionary<string, Stopwatch>();
 
-        public static void Start(object view)
-        {
-            Start(view.GetType().Name);
-        }
-
+        private static readonly ConcurrentQueue<string> Results = new ConcurrentQueue<string>();
+        
         public static void Start(string tag)
         {
             Console.WriteLine("Starting Stopwatch {0}", tag);
 
-            var watch =
-                watches[tag] = new Stopwatch();
+            var watch = Watches[tag] = new Stopwatch();
             watch.Start();
         }
 
         public static void Stop(string tag)
         {
-            if (watches.TryGetValue(tag, out var watch))
+            if (!Watches.TryGetValue(tag, out var watch)) return;
+
+            var result = $"Stopwatch {tag} took {watch.Elapsed}";
+            Results.Enqueue(result);
+            Console.WriteLine(result);
+        }
+
+        public static string Result()
+        {
+            var sb = new StringBuilder();
+            foreach (var result in Results)
             {
-                Console.WriteLine("Stopwatch {0} took {1}", tag, watch.Elapsed);
+                sb.AppendLine(result);
             }
+
+            Console.WriteLine("All Profiler results:");
+            Console.WriteLine(sb.ToString());
+            return sb.ToString();
         }
     }
 }
