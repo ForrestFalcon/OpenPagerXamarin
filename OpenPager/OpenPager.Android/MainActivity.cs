@@ -14,6 +14,7 @@ using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using OpenPager.Models;
 using Plugin.CurrentActivity;
+using Plugin.FirebasePushNotification;
 using Plugin.Permissions;
 using Xamarin.Forms;
 
@@ -52,8 +53,11 @@ namespace OpenPager.Droid
             Profiler.Start("LoadApplication");
             LoadApplication(_app.Value);
             Profiler.Stop("LoadApplication");
-
-            CheckOperationJson(Intent);
+            
+            if (!CheckOperationJson(Intent))
+            {
+                FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            }
         }
 
         protected override void OnResume()
@@ -72,26 +76,31 @@ namespace OpenPager.Droid
         protected override void OnNewIntent(Android.Content.Intent intent)
         {
             base.OnNewIntent(intent);
-            CheckOperationJson(intent);
+            if (!CheckOperationJson(intent))
+            {
+                FirebasePushNotificationManager.ProcessIntent(this, intent);
+            }
         }
 
-        private void CheckOperationJson(Android.Content.Intent intent)
+        private bool CheckOperationJson(Android.Content.Intent intent)
         {
-            if (!intent.HasExtra(MyFirebaseMessagingService.INTENT_EXTRA_OPERATION))
+            if (!intent.HasExtra(MainApplication.INTENT_EXTRA_OPERATION))
             {
-                return;
+                return false;
             }
 
-            var operationJson = intent.GetStringExtra(MyFirebaseMessagingService.INTENT_EXTRA_OPERATION);
+            var operationJson = intent.GetStringExtra(MainApplication.INTENT_EXTRA_OPERATION);
             if (String.IsNullOrEmpty(operationJson))
             {
-                return;
+                return false;
             }
 
             AddAlarmFlags();
 
             var operation = JsonConvert.DeserializeObject<Operation>(operationJson);
             _app.Value.PushOperationAsync(operation);
+
+            return true;
         }
 
         private void AddAlarmFlags()

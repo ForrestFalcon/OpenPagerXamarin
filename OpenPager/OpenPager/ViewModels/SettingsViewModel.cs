@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OpenPager.Services;
+using Plugin.FirebasePushNotification;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -57,7 +58,7 @@ namespace OpenPager.ViewModels
         public SettingsViewModel()
         {
             Title = "Einstellungen";
-            FcmKey = DependencyService.Get<IPushHandler>().GetKey();
+            FcmKey = CrossFirebasePushNotification.Current.Token; // DependencyService.Get<IPushHandler>().GetKey();
 
             ShareKeyCommand = new Command(ShareKey);
             ProfilerCommand = new Command(async () =>
