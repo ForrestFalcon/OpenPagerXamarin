@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Essentials;
 
-namespace OpenPager.Helper
+namespace OpenPager.Helpers
 {
     public class AlarmHelper
     {

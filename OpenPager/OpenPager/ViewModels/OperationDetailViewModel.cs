@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using OpenPager.Helper;
+using OpenPager.Helpers;
 using OpenPager.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Microsoft.AppCenter.Crashes;
 using OpenPager.Models;
-using Xamarin.Forms.Internals;
 
-namespace OpenPager.Helper
+namespace OpenPager.Helpers
 {
     public static class OperationHelper
     {

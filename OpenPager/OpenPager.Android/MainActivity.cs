@@ -34,12 +34,6 @@ namespace OpenPager.Droid
             
             base.OnCreate(bundle);
             
-            var appcenterKey = System.Environment.GetEnvironmentVariable("APPCENTER_KEY");
-            if (!String.IsNullOrEmpty(appcenterKey))
-            {
-                AppCenter.Start(appcenterKey, typeof(Analytics), typeof(Crashes));
-            }
-
             CheckPlayService();
 
             Forms.SetFlags("FastRenderers_Experimental");

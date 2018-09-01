@@ -5,7 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Newtonsoft.Json;
-using OpenPager.Helper;
+using OpenPager.Helpers;
 using Plugin.CurrentActivity;
 using Plugin.FirebasePushNotification;
 using Xamarin.Essentials;

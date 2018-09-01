@@ -8,6 +8,8 @@
     <PackageReference Include="AiForms.SettingsView" Version="0.2.6" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.9.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.9.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.9.0" />
+    <PackageReference Include="Mobile.BuildTools" Version="1.4.0.638" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Plugin.FirebasePushNotification" Version="2.3.5" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />

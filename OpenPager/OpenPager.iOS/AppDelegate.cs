@@ -6,6 +6,7 @@ using Foundation;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 using UIKit;
 
 namespace OpenPager.iOS
@@ -25,17 +26,13 @@ namespace OpenPager.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            var appcenterKey = System.Environment.GetEnvironmentVariable("APPCENTER_KEY");
-            if (!String.IsNullOrEmpty(appcenterKey))
-            {
-                AppCenter.Start(appcenterKey, typeof(Analytics), typeof(Crashes));
-            }
-            
             Profiler.Start("Forms.Init");
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.FormsMaps.Init();
 
             AiForms.Renderers.iOS.SettingsViewInit.Init();
+
+            Distribute.DontCheckForUpdatesInDebug();
             Profiler.Stop("Forms.Init");
 
             Profiler.Start("LoadApplication");

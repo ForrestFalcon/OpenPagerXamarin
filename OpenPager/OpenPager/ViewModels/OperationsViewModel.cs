@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using OpenPager.Helpers;
 using Xamarin.Forms;
 
 using OpenPager.Models;

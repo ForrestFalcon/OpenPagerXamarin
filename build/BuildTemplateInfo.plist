@@ -40,5 +40,14 @@
 	<string>Can we use your location when your app is being used?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Can we use your location at all times?</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appcenter-$$APP_SECRET$$</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

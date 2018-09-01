@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
-using OpenPager.Helper;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
+using OpenPager.Helpers;
 using OpenPager.Models;
 using OpenPager.Services;
 using Xamarin.Forms;
@@ -26,6 +29,9 @@ namespace OpenPager
 
         public App()
         {
+            Microsoft.AppCenter.AppCenter.Start(Constants.AppCenterStart,
+                typeof(Analytics), typeof(Crashes), typeof(Distribute));
+
             DependencyService.Register<IDataStore<Operation>, OperationDataStore>();
 
             if (!DesignMode.IsDesignModeEnabled)
@@ -74,7 +80,7 @@ namespace OpenPager
                 }
             };
         }
-
+        
         public void PushOperationAsync(Operation operation)
         {
             Device.BeginInvokeOnMainThread(async () =>
