@@ -4,6 +4,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
+using Java.Lang;
 using Newtonsoft.Json;
 using OpenPager.Helpers;
 using Plugin.CurrentActivity;
@@ -59,7 +60,20 @@ namespace OpenPager.Droid
                         StartActivity(intent);
                     }
                 }
+                else if (!IsInForeground())
+                {
+                    // bring app in the foreground if it isn't
+                    Intent intent = new Intent(this, typeof(MainActivity));
+                    StartActivity(intent);
+                }
             };
+        }
+
+        private bool IsInForeground()
+        {
+            ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
+            ActivityManager.GetMyMemoryState(appProcessInfo);
+            return appProcessInfo.Importance == Importance.Visible || appProcessInfo.Importance == Importance.Foreground;
         }
     }
 }
