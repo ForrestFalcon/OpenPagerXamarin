@@ -49,7 +49,7 @@ namespace OpenPager.Droid
             //Handle notification when app is closed here
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
-                if (Xamarin.Forms.Application.Current == null)
+                if (Xamarin.Forms.Application.Current == null || !IsInForeground())
                 {
                     bool isAlarmActive = Preferences.Get(Constants.PreferenceAlarmActivate, Constants.PreferenceAlarmActivateDefault);
                     var operation = OperationHelper.MapFirebaseToOperation(p.Data);
@@ -59,12 +59,6 @@ namespace OpenPager.Droid
                         intent.PutExtra(INTENT_EXTRA_OPERATION, JsonConvert.SerializeObject(operation));
                         StartActivity(intent);
                     }
-                }
-                else if (!IsInForeground())
-                {
-                    // bring app in the foreground if it isn't
-                    Intent intent = new Intent(this, typeof(MainActivity));
-                    StartActivity(intent);
                 }
             };
         }

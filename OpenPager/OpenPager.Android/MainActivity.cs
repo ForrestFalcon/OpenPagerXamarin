@@ -94,8 +94,7 @@ namespace OpenPager.Droid
         {
             Window.AddFlags(WindowManagerFlags.DismissKeyguard |
                             WindowManagerFlags.ShowWhenLocked |
-                            WindowManagerFlags.TurnScreenOn |
-                            WindowManagerFlags.AllowLockWhileScreenOn);
+                            WindowManagerFlags.TurnScreenOn);
         }
 
         private void CheckPlayService()
