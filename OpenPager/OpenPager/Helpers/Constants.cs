@@ -18,6 +18,10 @@ namespace OpenPager.Helpers
         public const string PreferenceTtsVolume = "pref_tts_volume";
         public const float PreferenceTtsVolumeDefault = 1;
 
+        public const string PreferenceAppCenterCrash = "pref_appcenter_crash";
+        public const string PreferenceAppCenterAnalytics = "pref_appcenter_analytics";
+        public const bool PreferenceAppCenterDefault = true;
+
         public static string AppCenterStart
         {
             get

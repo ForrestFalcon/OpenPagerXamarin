@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using OpenPager.Helpers;
 using Plugin.FirebasePushNotification;
 using Xamarin.Essentials;
@@ -42,6 +45,29 @@ namespace OpenPager.ViewModels
             set => Preferences.Set(Constants.PreferenceTtsVolume, value.Volume);
         }
 
+        public bool IsPreferenceAppCenterVisible => AppCenter.Configured;
+
+        public bool PreferenceAppCenterCrash
+        {
+            get => Preferences.Get(Constants.PreferenceAppCenterCrash, Constants.PreferenceAppCenterDefault);
+            set
+            {
+                Preferences.Set(Constants.PreferenceAppCenterCrash, value);
+                Crashes.SetEnabledAsync(value);
+            }
+        }
+
+        public bool PreferenceAppCenterAnalytics
+        {
+            get => Preferences.Get(Constants.PreferenceAppCenterAnalytics, Constants.PreferenceAppCenterDefault);
+            set
+            {
+                Preferences.Set(Constants.PreferenceAppCenterAnalytics, value);
+                Analytics.SetEnabledAsync(value);
+            }
+        }
+
+
         public List<SettingsVolume> PreferenceTtsVolumeList => new List<SettingsVolume>()
         {
             new SettingsVolume(0.25f),
@@ -61,10 +87,7 @@ namespace OpenPager.ViewModels
             FcmKey = CrossFirebasePushNotification.Current.Token; // DependencyService.Get<IPushHandler>().GetKey();
 
             ShareKeyCommand = new Command(ShareKey);
-            ProfilerCommand = new Command(async () =>
-                {
-                    await Application.Current.MainPage.DisplayAlert("Profiler result", Profiler.Result(), "OK");
-                });
+            ProfilerCommand = new Command(async () => { await Application.Current.MainPage.DisplayAlert("Profiler result", Profiler.Result(), "OK"); });
         }
 
         private async void ShareKey()

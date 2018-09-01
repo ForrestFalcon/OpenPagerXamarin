@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
@@ -13,6 +14,7 @@ using SQLite;
 using Xamarin.Essentials;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+using Device = Xamarin.Forms.Device;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -29,8 +31,7 @@ namespace OpenPager
 
         public App()
         {
-            Microsoft.AppCenter.AppCenter.Start(Constants.AppCenterStart,
-                typeof(Analytics), typeof(Crashes), typeof(Distribute));
+            SetUpAppCenter();
 
             DependencyService.Register<IDataStore<Operation>, OperationDataStore>();
 
@@ -39,7 +40,6 @@ namespace OpenPager
                 VersionTracking.Track();
             }
 
-            
             InitializeComponent();
 
             MainPage = new NavigationPage(new OperationsPage());
@@ -62,7 +62,6 @@ namespace OpenPager
                 {
                     System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
                 }
-
             };
 
             CrossFirebasePushNotification.Current.OnNotificationAction += (s, p) =>
@@ -76,11 +75,21 @@ namespace OpenPager
                     {
                         System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
                     }
-
                 }
             };
         }
-        
+
+        private async void SetUpAppCenter()
+        {
+            AppCenter.Start(Constants.AppCenterStart, typeof(Analytics), typeof(Crashes), typeof(Distribute));
+
+            var crash = Preferences.Get(Constants.PreferenceAppCenterCrash, Constants.PreferenceAppCenterDefault);
+            await Crashes.SetEnabledAsync(crash);
+            
+            var analytics = Preferences.Get(Constants.PreferenceAppCenterAnalytics, Constants.PreferenceAppCenterDefault);
+            await Analytics.SetEnabledAsync(analytics);
+        }
+
         public void PushOperationAsync(Operation operation)
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -96,7 +105,6 @@ namespace OpenPager
 
         protected override void OnStart()
         {
-
         }
 
         protected override void OnSleep()

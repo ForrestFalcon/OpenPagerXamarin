@@ -18,7 +18,8 @@
                            Description="Vibrieren bei Alarmempfang." />
             <sv:SwitchCell Title="Alarmtitel vorlesen" On="{Binding PreferenceTts}"
                            Description="Alarmtitel bei Alarmempfang vorlesen." />
-            <sv:TextPickerCell Title="Vorlesen Lautstärke" Items="{Binding PreferenceTtsVolumeList}" SelectedItem="{Binding PreferenceTtsVolume}"
+            <sv:TextPickerCell Title="Vorlesen Lautstärke" Items="{Binding PreferenceTtsVolumeList}"
+                               SelectedItem="{Binding PreferenceTtsVolume}"
                                Description="Lautstärke in Prozent welche beim Vorlesen gesetzt werden soll." />
         </sv:Section>
 
@@ -26,8 +27,18 @@
             <sv:CommandCell Title="FCM-Key" Description="{Binding FcmKey}" Command="{Binding ShareKeyCommand}" />
         </sv:Section>
 
+        <sv:Section Title="AppCenter" IsVisible="{Binding IsPreferenceAppCenterVisible}">
+            <sv:SwitchCell Title="Crash-Reports"
+                            Description="Sendet automatisiert Crash-Reports um die Stabilität der Anwendung zu erhöhen."
+                            On="{Binding PreferenceAppCenterCrash}" />
+            <sv:SwitchCell Title="Analytics"
+                            Description="Sendet automatisiert Informationen über das Benutzerverhalten. Dabei werden KEINE Daten über eventuelle Einsätze gesendet."
+                           On="{Binding PreferenceAppCenterAnalytics}"/>
+        </sv:Section>
+
         <sv:Section Title="Debug">
-            <sv:CommandCell Title="Profiler Ergebnis" Description="Zeigt das Ergebnis des internen Profiler an." Command="{Binding ProfilerCommand}" />
+            <sv:CommandCell Title="Profiler Ergebnis" Description="Zeigt das Ergebnis des internen Profiler an."
+                            Command="{Binding ProfilerCommand}" />
         </sv:Section>
     </sv:SettingsView>
 </ContentPage>
