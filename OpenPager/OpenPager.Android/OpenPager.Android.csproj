@@ -20,6 +20,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <AndroidKeyStore>false</AndroidKeyStore>
+    <AutomaticVersionEnvironment>BuildHost</AutomaticVersionEnvironment>
+    <AutomaticVersionBehavior>PreferBuildNumber</AutomaticVersionBehavior>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

@@ -14,6 +14,8 @@
     <AssemblyName>OpenPager.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AutomaticVersionEnvironment>BuildHost</AutomaticVersionEnvironment>
+    <AutomaticVersionBehavior>PreferBuildNumber</AutomaticVersionBehavior>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,8 +31,9 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <CodesignKey>iPhone Developer: Kevin Stieglitz (SG9TH8D8T3)</CodesignKey>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision>
+    </CodesignProvision>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <CodesignExtraArgs />
     <CodesignResourceRules />
