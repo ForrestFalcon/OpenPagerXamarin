@@ -26,7 +26,14 @@ namespace OpenPager.Views
 
             InitializeComponent();
 
-            Children.Add(new OperationDetailPage(new OperationDetailViewModel(operation, isAlarm)));
+            // Info page
+            var page = new OperationDetailPage(new OperationDetailViewModel(operation, isAlarm));
+            if (Device.RuntimePlatform == Device.iOS)
+                page.Icon = "baseline_info_black_24pt";
+
+            Children.Add(page);
+
+
             CheckLocation();
 
             if (operation != null && operation.DestinationLat.HasValue && operation.DestinationLng.HasValue)
@@ -45,7 +52,14 @@ namespace OpenPager.Views
 
             if (locationStatus == PermissionStatus.Granted)
             {
-                Children.Add(new OperationMapPage(_operation));
+                // Map page
+                var page = new OperationMapPage(_operation);
+
+                if (Device.RuntimePlatform == Device.iOS)
+                    page.Icon = "baseline_map_black_24pt";
+
+                Children.Add(page);
+
             }
         }
     }

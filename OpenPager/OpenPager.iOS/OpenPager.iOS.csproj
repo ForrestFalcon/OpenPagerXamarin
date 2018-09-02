@@ -100,6 +100,18 @@
     <BundleResource Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="Resources\baseline_format_align_justify_black_24pt.png" />
+    <BundleResource Include="Resources\baseline_format_align_justify_black_24pt%402x.png" />
+    <BundleResource Include="Resources\baseline_format_align_justify_black_24pt%403x.png" />
+    <BundleResource Include="Resources\baseline_near_me_black_24pt.png" />
+    <BundleResource Include="Resources\baseline_near_me_black_24pt%402x.png" />
+    <BundleResource Include="Resources\baseline_near_me_black_24pt%403x.png" />
+    <BundleResource Include="Resources\baseline_info_black_24pt.png" />
+    <BundleResource Include="Resources\baseline_info_black_24pt%402x.png" />
+    <BundleResource Include="Resources\baseline_info_black_24pt%403x.png" />
+    <BundleResource Include="Resources\baseline_map_black_24pt.png" />
+    <BundleResource Include="Resources\baseline_map_black_24pt%402x.png" />
+    <BundleResource Include="Resources\baseline_map_black_24pt%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

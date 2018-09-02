@@ -68,11 +68,11 @@ namespace OpenPager.ViewModels
 
             if (isAlarm)
             {
-                bool vibrate = Preferences.Get(Constants.PreferenceVibrate, Constants.PreferenceVibrateDefault);
                 bool tts = Preferences.Get(Constants.PreferenceTts, Constants.PreferenceTtsDefault);
 
                 TimerColor = Color.Red;
-                if (vibrate) AlarmHelper.Vibrate();
+                AlarmHelper.Vibrate();
+
                 if (tts) StartTts();
             }
         }
@@ -82,7 +82,7 @@ namespace OpenPager.ViewModels
             float volume = Preferences.Get(Constants.PreferenceTtsVolume, Constants.PreferenceTtsVolumeDefault);
 
             ctsTTS = new CancellationTokenSource();
-            await TextToSpeech.SpeakAsync(Operation.Title, new SpeakSettings()
+            await TextToSpeech.SpeakAsync(Operation.Message, new SpeakSettings()
             {
                 Volume = volume
             }, ctsTTS.Token);

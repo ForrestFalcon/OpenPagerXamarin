@@ -6,7 +6,8 @@ namespace OpenPager.Models
     public class Operation
     {
         [PrimaryKey]
-        public string Id { get; set; }
+        public string Id{ get; set; }
+
         public string Title { get; set; }
         public string Message { get; set; }
         public DateTime Time { get; set; }

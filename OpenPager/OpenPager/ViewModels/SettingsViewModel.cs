@@ -24,7 +24,17 @@ namespace OpenPager.ViewModels
         public bool PreferenceIsActive
         {
             get => Preferences.Get(Constants.PreferenceAlarmActivate, Constants.PreferenceAlarmActivateDefault);
-            set => Preferences.Set(Constants.PreferenceAlarmActivate, value);
+            set {
+                Preferences.Set(Constants.PreferenceAlarmActivate, value);
+                if(value) {
+                    CrossFirebasePushNotification.Current.RegisterForPushNotifications().ContinueWith((o) => {
+                        FcmKey = CrossFirebasePushNotification.Current.Token;
+                    });
+                } else {
+                    FcmKey = string.Empty;
+                    CrossFirebasePushNotification.Current.UnregisterForPushNotifications();
+                }
+            }
         }
 
         public bool PreferenceVibrate

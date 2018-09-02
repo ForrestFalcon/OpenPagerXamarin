@@ -47,6 +47,7 @@ namespace OpenPager
             //Handle notification when app is closed here
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
+                System.Diagnostics.Debug.WriteLine("Push Forms: OnNotificationReceived");
                 bool isAlarmActive = Preferences.Get(Constants.PreferenceAlarmActivate, Constants.PreferenceAlarmActivateDefault);
                 var operation = OperationHelper.MapFirebaseToOperation(p.Data);
                 if (isAlarmActive && operation != null)
@@ -58,22 +59,17 @@ namespace OpenPager
             CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
             {
                 // Notification is opened (probably from iOS)
-                System.Diagnostics.Debug.WriteLine("Opened");
-                foreach (var data in p.Data)
-                {
-                    System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
-                }
-
+                System.Diagnostics.Debug.WriteLine("Push Forms: OnNotificationOpened");
                 var operation = OperationHelper.MapFirebaseToOperation(p.Data);
                 if (operation != null)
                 {
-                    PushOperationAsync(operation, false);
+                    PushOperationAsync(operation, true);
                 }
             };
 
             CrossFirebasePushNotification.Current.OnNotificationAction += (s, p) =>
             {
-                System.Diagnostics.Debug.WriteLine("Action");
+                System.Diagnostics.Debug.WriteLine("Push Forms: OnNotificationAction");
 
                 if (!string.IsNullOrEmpty(p.Identifier))
                 {
@@ -97,15 +93,14 @@ namespace OpenPager
             await Analytics.SetEnabledAsync(analytics);
         }
 
-        public void PushOperationAsync(Operation operation, bool isAlarm = true)
+        public async void PushOperationAsync(Operation operation, bool isAlarm = true)
         {
+            await DependencyService.Get<IDataStore<Operation>>().AddItemAsync(operation);
+            MessagingCenter.Send(this, Constants.MessageNewOperation);
+
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await DependencyService.Get<IDataStore<Operation>>().AddItemAsync(operation);
-
-                await MainPage.Navigation.PushAsync(new OperationTabPage(operation, true));
-
-                MessagingCenter.Send(this, Constants.MessageNewOperation);
+                await MainPage.Navigation.PushAsync(new OperationTabPage(operation, isAlarm));
             });
         }
 

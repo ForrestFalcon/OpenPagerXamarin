@@ -1,9 +1,12 @@
 ﻿using System;
+using Firebase.CloudMessaging;
 
 using Foundation;
 using Microsoft.AppCenter.Distribute;
+using OpenPager.Helpers;
 using Plugin.FirebasePushNotification;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace OpenPager.iOS
 {
@@ -36,7 +39,7 @@ namespace OpenPager.iOS
             Profiler.Stop("LoadApplication");
 
             FirebasePushNotificationManager.Initialize(options, true);
-            
+
             return base.FinishedLaunching(app, options);
         }
 
@@ -60,11 +63,21 @@ namespace OpenPager.iOS
             // If you disable method swizzling, you'll need to call this method. 
             // This lets FCM track message delivery and analytics, which is performed
             // automatically with method swizzling enabled.
-            FirebasePushNotificationManager.DidReceiveMessage(userInfo);
+
+            // FirebasePushNotificationManager.DidReceiveMessage(userInfo); // this will call the onReceive method
+            Messaging.SharedInstance.AppDidReceiveMessage(userInfo);
+
             // Do your magic to handle the notification data
-            System.Console.WriteLine(userInfo);
+            Console.WriteLine("DidReceiveRemoteNotification (State: {0}):", application.ApplicationState);
+            Console.WriteLine(userInfo);
+
+            if(application.ApplicationState == UIApplicationState.Background) {
+                InvokeOnMainThread(AlarmHelper.Vibrate);
+            }
 
             completionHandler(UIBackgroundFetchResult.NewData);
         }
+
+
     }
 }
