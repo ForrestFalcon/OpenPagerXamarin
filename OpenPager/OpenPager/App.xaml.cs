@@ -57,10 +57,17 @@ namespace OpenPager
 
             CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
             {
+                // Notification is opened (probably from iOS)
                 System.Diagnostics.Debug.WriteLine("Opened");
                 foreach (var data in p.Data)
                 {
                     System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
+                }
+
+                var operation = OperationHelper.MapFirebaseToOperation(p.Data);
+                if (operation != null)
+                {
+                    PushOperationAsync(operation, false);
                 }
             };
 
@@ -90,14 +97,13 @@ namespace OpenPager
             await Analytics.SetEnabledAsync(analytics);
         }
 
-        public void PushOperationAsync(Operation operation)
+        public void PushOperationAsync(Operation operation, bool isAlarm = true)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await DependencyService.Get<IDataStore<Operation>>().AddItemAsync(operation);
 
-                await MainPage.Navigation.PushModalAsync(
-                    new NavigationPage(new OperationTabPage(operation, true)));
+                await MainPage.Navigation.PushAsync(new OperationTabPage(operation, true));
 
                 MessagingCenter.Send(this, Constants.MessageNewOperation);
             });
