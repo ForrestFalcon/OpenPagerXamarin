@@ -38,6 +38,10 @@ namespace OpenPager.Services
             return await Task.FromResult(true);
         }
 
+        public async Task<bool> InsertOrReplaceAsync(Operation item) {
+            return await UpdateItemAsync(item);
+        }
+
         public async Task<bool> UpdateItemAsync(Operation operation)
         {
             var item = items.FirstOrDefault(arg => arg.Id == operation.Id);

@@ -3,7 +3,6 @@ using System.IO;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using Microsoft.AppCenter.Distribute;
 using OpenPager.Helpers;
 using OpenPager.Models;
 using OpenPager.Services;
@@ -12,7 +11,6 @@ using OpenPager.Views;
 using Plugin.FirebasePushNotification;
 using SQLite;
 using Xamarin.Essentials;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using Device = Xamarin.Forms.Device;
 
@@ -84,7 +82,7 @@ namespace OpenPager
 
         private async void SetUpAppCenter()
         {
-            AppCenter.Start(Constants.AppCenterStart, typeof(Analytics), typeof(Crashes), typeof(Distribute));
+            AppCenter.Start(Constants.AppCenterStart, typeof(Analytics), typeof(Crashes));
 
             var crash = Preferences.Get(Constants.PreferenceAppCenterCrash, Constants.PreferenceAppCenterDefault);
             await Crashes.SetEnabledAsync(crash);
@@ -100,6 +98,7 @@ namespace OpenPager
 
             Device.BeginInvokeOnMainThread(async () =>
             {
+                MainPage = new NavigationPage(new OperationsPage());
                 await MainPage.Navigation.PushAsync(new OperationTabPage(operation, isAlarm));
             });
         }

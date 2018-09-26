@@ -18,6 +18,10 @@ namespace OpenPager.Services
         {
             return App.Database.InsertAsync(item).ContinueWith(t => t.Result > 0);
         }
+        public Task<bool> InsertOrReplaceAsync(Operation item)
+        {
+            return App.Database.InsertOrReplaceAsync(item).ContinueWith(t => t.Result > 0);
+        }
 
         public Task<bool> UpdateItemAsync(Operation item)
         {
